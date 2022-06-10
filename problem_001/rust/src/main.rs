@@ -36,7 +36,7 @@ mod tests {
 
             println!(
                 "Upper bound: {:>10}, Result: {:>20}, Time: {:>10?}",
-                upper_bound, res, elapsed
+                upper_bound, res, elapsed.as_micros()
             );
         }
     }
