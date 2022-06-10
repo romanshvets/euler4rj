@@ -27,7 +27,7 @@ mod tests {
 
     #[test]
     fn test_sum_of_multiples_performance() {
-        for n in 1..10 {
+        for n in 3..10 {
             let upper_bound = 10u128.pow(n);
 
             let now = Instant::now();
