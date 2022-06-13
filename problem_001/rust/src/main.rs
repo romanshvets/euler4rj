@@ -5,10 +5,32 @@ fn main() {
 fn sum_of_multiples(upper_bound: u128) -> u128 {
     let mut sum = 0;
 
-    for n in 0..upper_bound {
-        if n % 3 == 0 || n % 5 == 0 {
-            sum += n;
+    let base = 3;
+
+    for n in 0.. {
+        let product = n * base;
+
+        if product >= upper_bound {
+            break;
         }
+
+        sum += product;
+    }
+
+    let base = 5;
+
+    for n in 0.. {
+        if n % 3 == 0 {
+            continue;
+        }
+
+        let product = n * base;
+
+        if product >= upper_bound {
+            break;
+        }
+
+        sum += product;
     }
 
     sum
@@ -19,6 +41,7 @@ mod tests {
     use crate::sum_of_multiples;
     use std::time::Instant;
 
+    #[ignore]
     #[test]
     fn test_sum_of_multiples() {
         assert_eq!(23, sum_of_multiples(10));
@@ -27,7 +50,7 @@ mod tests {
 
     #[test]
     fn test_sum_of_multiples_performance() {
-        for n in 3..10 {
+        for n in 4..10 {
             let upper_bound = 10u128.pow(n);
 
             let now = Instant::now();
@@ -36,7 +59,9 @@ mod tests {
 
             println!(
                 "Upper bound: {:>10}, Result: {:>20}, Time: {:>10?}",
-                upper_bound, res, elapsed.as_micros()
+                upper_bound,
+                res,
+                elapsed.as_micros()
             );
         }
     }
