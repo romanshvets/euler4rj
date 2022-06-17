@@ -38,8 +38,9 @@ fn sum_of_multiples(upper_bound: u128) -> u128 {
 
 #[cfg(test)]
 mod tests {
-    use crate::sum_of_multiples;
     use std::time::Instant;
+
+    use crate::sum_of_multiples;
 
     #[ignore]
     #[test]
@@ -57,12 +58,12 @@ mod tests {
             let res = sum_of_multiples(upper_bound);
             let elapsed = now.elapsed();
 
-            println!(
-                "Upper bound: {:>10}, Result: {:>20}, Time: {:>10?}",
-                upper_bound,
-                res,
-                elapsed.as_micros()
-            );
+            println!("Upper bound: 10^{},  Time: {:>8?}", n, elapsed.as_micros());
+
+            // had to add this to prevent rust compiler optimization and force him to call sum_of_multiples
+            if res <= 0 {
+                println!("{}", res);
+            }
         }
     }
 }
