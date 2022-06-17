@@ -60,7 +60,7 @@ mod tests {
 
             println!("Upper bound: 10^{},  Time: {:>8?}", n, elapsed.as_micros());
 
-            // had to add this to prevent rust compiler optimization and force him to call sum_of_multiples
+            // had to add this to prevent rust compiler optimization
             if res <= 0 {
                 println!("{}", res);
             }
