@@ -1,0 +1,28 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+def junit_version = '5.8.2'
+
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${junit_version}"
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: "${junit_version}"
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "${junit_version}"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+compileJava {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+application {
+    mainClass = 'com.rshvets.euler.Problem001'
+}
