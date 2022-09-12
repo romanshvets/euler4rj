@@ -26,5 +26,4 @@ public class Problem002 {
 
         return sum;
     }
-
 }

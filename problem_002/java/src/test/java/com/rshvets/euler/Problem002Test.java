@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import static com.rshvets.euler.Problem002.sumOfEvenFibonacciNumbers;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Problem002Test {
@@ -19,6 +20,6 @@ class Problem002Test {
                 sumOfEvenFibonacciUnder50 += fibonacci;
         }
 
-        assertEquals(sumOfEvenFibonacciUnder50, Problem002.sumOfEvenFibonacciNumbers(50));
+        assertEquals(sumOfEvenFibonacciUnder50, sumOfEvenFibonacciNumbers(50));
     }
 }
