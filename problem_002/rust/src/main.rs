@@ -26,7 +26,6 @@ fn sum_of_even_fibonacci_numbers(upper_bound: u64) -> u64 {
 
 #[cfg(test)]
 mod tests {
-
     use crate::sum_of_even_fibonacci_numbers;
 
     #[test]
