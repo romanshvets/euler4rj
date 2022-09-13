@@ -1,17 +1,19 @@
 package com.rshvets.euler;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiPredicate;
 
 import static com.rshvets.euler.Problem003.isPrime;
+import static com.rshvets.euler.Problem003.primeFactors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Problem003Test {
-
-//    The prime factors of 13195 are 5, 7, 13 and 29.
 
     @Test
     void testLargestPrimeFactor() {
@@ -20,13 +22,17 @@ class Problem003Test {
 
     @Test
     void testPrimeFactors() {
-        BiPredicate<List<Number>, List<Number>> listsComparator = (list1, list2) -> {
+        BiPredicate<List<Long>, List<Long>> listsComparator = (list1, list2) -> {
+            if (list1.isEmpty()) {
+
+            }
+
+
             return false;
         };
 
-
+        assertTrue(listsComparator.test(Arrays.asList(5L, 7L, 13L, 29L), primeFactors(13195L)));
     }
-
 
     @Test
     void testIsPrime() {
@@ -35,6 +41,18 @@ class Problem003Test {
 
         for (var i = 0; i < 100; ++i) {
             assertEquals(isPrime(i), primesUnder100.contains(i));
+        }
+    }
+
+    private static void assertListsEquals(List<Long> a, List<Long> b) {
+        if (a.size() != b.size())
+            throw new AssertionFailedError();
+
+        for (var i = 0; i < a.size(); ++i) {
+            var aElement = a.get(i);
+            var bElement = b.get(i);
+
+            assertEquals(aElement, bElement);
         }
     }
 }
