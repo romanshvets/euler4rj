@@ -1,37 +1,28 @@
 package com.rshvets.euler;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.BiPredicate;
 
-import static com.rshvets.euler.Problem003.isPrime;
-import static com.rshvets.euler.Problem003.primeFactors;
+import static com.rshvets.euler.Problem003.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Problem003Test {
 
     @Test
     void testLargestPrimeFactor() {
-
+        assertEquals(7L, largestPrimeFactor(primeFactors(392L)));
+        assertEquals(29L, largestPrimeFactor(primeFactors(13195L)));
+        assertEquals(997L, largestPrimeFactor(primeFactors(105682L)));
     }
 
     @Test
     void testPrimeFactors() {
-        BiPredicate<List<Long>, List<Long>> listsComparator = (list1, list2) -> {
-            if (list1.isEmpty()) {
-
-            }
-
-
-            return false;
-        };
-
-        assertTrue(listsComparator.test(Arrays.asList(5L, 7L, 13L, 29L), primeFactors(13195L)));
+        assertListsEquals(Arrays.asList(2L, 7L), primeFactors(392L));
+        assertListsEquals(Arrays.asList(5L, 7L, 13L, 29L), primeFactors(13195L));
+        assertListsEquals(Arrays.asList(2L, 53L, 997L), primeFactors(105682L));
     }
 
     @Test
@@ -44,6 +35,9 @@ class Problem003Test {
         }
     }
 
+    /**
+     * Helper method
+     */
     private static void assertListsEquals(List<Long> a, List<Long> b) {
         if (a.size() != b.size())
             throw new AssertionFailedError();

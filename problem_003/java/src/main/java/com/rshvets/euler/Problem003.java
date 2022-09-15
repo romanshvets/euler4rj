@@ -6,11 +6,16 @@ import java.util.List;
 public class Problem003 {
 
     public static void main(String[] args) {
-        System.out.printf("Result: %s", largestPrimeFactor(600851475143L));
+        var primeFactors = primeFactors(600851475143L);
+
+        System.out.printf("Result: %s", largestPrimeFactor(primeFactors));
     }
 
-    public static long largestPrimeFactor(long n) {
-        return 0;
+    public static long largestPrimeFactor(List<Long> primeFactors) {
+        if (primeFactors.isEmpty())
+            return 0;
+
+        return primeFactors.get(primeFactors.size() - 1);
     }
 
     public static List<Long> primeFactors(long n) {
