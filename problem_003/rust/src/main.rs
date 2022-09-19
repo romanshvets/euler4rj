@@ -63,6 +63,7 @@ fn is_prime(n: u64) -> bool {
 
 #[cfg(test)]
 mod tests {
+    use std::time::Instant;
     use crate::{get_largest_prime_factor, get_prime_factors, is_prime};
 
     #[test]
@@ -77,6 +78,23 @@ mod tests {
         assert_eq!(vec![2, 7], get_prime_factors(392));
         assert_eq!(vec![5, 7, 13, 29], get_prime_factors(13195));
         assert_eq!(vec![2, 53, 997], get_prime_factors(105682));
+    }
+
+    #[test]
+    fn test_prime_factors_performance() {
+        let now = Instant::now();
+        for n in 2..=100_000 {
+            let prime_factors = get_prime_factors(n);
+
+            if prime_factors.len() > 1_000_000 {
+                println!("ok!");
+            }
+        }
+
+        let elapsed = now.elapsed();
+        println!("Duration = {:?}", elapsed);
+
+        // 8.4499846s
     }
 
     #[test]
