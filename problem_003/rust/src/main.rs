@@ -63,35 +63,31 @@ fn is_prime(n: u64) -> bool {
 
 #[cfg(test)]
 mod tests {
+    use crate::{get_largest_prime_factor, get_prime_factors, is_prime};
 
+    #[test]
+    fn test_get_largest_prime_factor() {
+        assert_eq!(7, get_largest_prime_factor(&vec![2, 7]));
+        assert_eq!(29, get_largest_prime_factor(&vec![5, 7, 13, 29]));
+        assert_eq!(997, get_largest_prime_factor(&vec![2, 53, 997]));
+    }
 
+    #[test]
+    fn test_prime_factors() {
+        assert_eq!(vec![2, 7], get_prime_factors(392));
+        assert_eq!(vec![5, 7, 13, 29], get_prime_factors(13195));
+        assert_eq!(vec![2, 53, 997], get_prime_factors(105682));
+    }
 
+    #[test]
+    fn test_is_prime() {
+        let primes_under_50 = vec![
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83,
+            89, 97,
+        ];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        for i in 2..100 {
+            assert_eq!(is_prime(i), primes_under_50.contains(&i));
+        }
+    }
 }
