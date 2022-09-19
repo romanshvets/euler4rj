@@ -13,16 +13,16 @@ class Problem003Test {
 
     @Test
     void testLargestPrimeFactor() {
-        assertEquals(7L, largestPrimeFactor(primeFactors(392L)));
-        assertEquals(29L, largestPrimeFactor(primeFactors(13195L)));
-        assertEquals(997L, largestPrimeFactor(primeFactors(105682L)));
+        assertEquals(7L, getLargestPrimeFactor(getPrimeFactors(392L)));
+        assertEquals(29L, getLargestPrimeFactor(getPrimeFactors(13195L)));
+        assertEquals(997L, getLargestPrimeFactor(getPrimeFactors(105682L)));
     }
 
     @Test
     void testPrimeFactors() {
-        assertListsEquals(Arrays.asList(2L, 7L), primeFactors(392L));
-        assertListsEquals(Arrays.asList(5L, 7L, 13L, 29L), primeFactors(13195L));
-        assertListsEquals(Arrays.asList(2L, 53L, 997L), primeFactors(105682L));
+        assertListsEquals(Arrays.asList(2L, 7L), getPrimeFactors(392L));
+        assertListsEquals(Arrays.asList(5L, 7L, 13L, 29L), getPrimeFactors(13195L));
+        assertListsEquals(Arrays.asList(2L, 53L, 997L), getPrimeFactors(105682L));
     }
 
     @Test
@@ -30,8 +30,8 @@ class Problem003Test {
         var primesUnder100 = Arrays.asList(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37,
                 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97);
 
-        for (var i = 0; i < 100; ++i) {
-            assertEquals(isPrime(i), primesUnder100.contains(i));
+        for (var i = 2; i < 100; ++i) {
+            assertEquals(isPrime(i), primesUnder100.contains(i), String.format("Mismatch for %s", i));
         }
     }
 
