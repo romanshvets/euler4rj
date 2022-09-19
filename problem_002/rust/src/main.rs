@@ -40,6 +40,9 @@ mod tests {
             }
         }
 
-        assert_eq!(sum_of_even_fibonacci_under_50, sum_of_even_fibonacci_numbers(50));
+        assert_eq!(
+            sum_of_even_fibonacci_under_50,
+            sum_of_even_fibonacci_numbers(50)
+        );
     }
 }
