@@ -13,9 +13,9 @@ class Problem003Test {
 
     @Test
     void testLargestPrimeFactor() {
-        assertEquals(7L, getLargestPrimeFactor(getPrimeFactors(392L)));
-        assertEquals(29L, getLargestPrimeFactor(getPrimeFactors(13195L)));
-        assertEquals(997L, getLargestPrimeFactor(getPrimeFactors(105682L)));
+        assertEquals(7L, getLargestPrimeFactor(Arrays.asList(2L, 7L)));
+        assertEquals(29L, getLargestPrimeFactor(Arrays.asList(5L, 7L, 13L, 29L)));
+        assertEquals(997L, getLargestPrimeFactor(Arrays.asList(2L, 53L, 997L)));
     }
 
     @Test
