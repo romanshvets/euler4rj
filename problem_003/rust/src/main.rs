@@ -6,21 +6,34 @@ fn main() {
 
 fn get_prime_factors(mut n: u64) -> Vec<u64> {
     let mut result = vec![];
-    let mut divider = 2;
 
-    while n != 1 {
-        while n % divider == 0 {
-            n = n / divider;
+    while n % 2 == 0 {
+        add_if_unique(&mut result, 2);
 
-            if !result.contains(&divider) {
-                result.push(divider);
-            }
+        n = n / 2;
+    }
+
+    let upper_bound = (n as f64).sqrt().floor() as u64;
+
+    for i in (3..=upper_bound).step_by(2) {
+        while n % i == 0 {
+            add_if_unique(&mut result, i);
+
+            n = n / i;
         }
+    }
 
-        divider += 1;
+    if n > 2 {
+        add_if_unique(&mut result, n);
     }
 
     result
+}
+
+fn add_if_unique(array: &mut Vec::<u64>, value: u64) -> () {
+    if !array.contains(&value) {
+        array.push(value);
+    }
 }
 
 fn get_largest_prime_factor(prime_factors: &[u64]) -> u64 {
@@ -52,16 +65,17 @@ mod tests {
 
     #[test]
     fn test_prime_factors_performance() {
-        let now = Instant::now();
-        for n in 2..=1_000_000 {
-            let prime_factors = get_prime_factors(n);
+        let upper_bounds = vec![100_000, 1_000_000, 10_000_000];
 
-            if prime_factors.len() > 1_000_000 {
-                println!("This should not happen");
+        for upper_bound in upper_bounds {
+            let now = Instant::now();
+
+            for n in 2..=upper_bound {
+                let _prime_factors = get_prime_factors(n);
             }
-        }
 
-        let elapsed = now.elapsed();
-        println!("Duration = {:?}", elapsed);
+            let elapsed = now.elapsed();
+            println!("Duration = {:?}", elapsed);
+        }
     }
 }
