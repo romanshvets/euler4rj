@@ -75,7 +75,7 @@ mod tests {
             }
 
             let elapsed = now.elapsed();
-            println!("Duration = {:?}", elapsed);
+            println!("Upper bound = {}, Duration = {:?}", upper_bound, elapsed);
         }
     }
 }
