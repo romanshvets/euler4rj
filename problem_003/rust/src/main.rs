@@ -65,7 +65,7 @@ mod tests {
 
     #[test]
     fn test_prime_factors_performance() {
-        let upper_bounds = vec![100_000, 1_000_000, 10_000_000];
+        let upper_bounds = vec![10_000, 100_000, 1_000_000, 10_000_000];
 
         for upper_bound in upper_bounds {
             let now = Instant::now();
