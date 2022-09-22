@@ -33,6 +33,7 @@ mod tests {
     use crate::get_largest_prime_factor;
     use std::time::Instant;
 
+    #[ignore]
     #[test]
     fn test_get_largest_prime_factor() {
         assert_eq!(7, get_largest_prime_factor(392));
@@ -42,16 +43,23 @@ mod tests {
 
     #[test]
     fn test_prime_factors_performance() {
-        let now = Instant::now();
+        let mut durations = vec![];
 
-        for n in 2..=1_000_000 {
-            let _max_prime_factors = get_largest_prime_factor(n);
+        for _ in 0..100 {
+            let now = Instant::now();
+
+            for n in 2..=1_000_000 {
+                let _max_prime_factors = get_largest_prime_factor(n);
+            }
+
+            durations.push(now.elapsed().as_millis());
         }
 
-        let elapsed = now.elapsed();
+        let average = durations.iter().sum::<u128>() / (durations.len() as u128);
+
         println!(
-            "Calculated prime factors for each number within [2, 1000000] range in {:?}",
-            elapsed
+            "Calculated prime factors for each number within [2, 1000000] range in {} ms",
+            average
         );
     }
 }
