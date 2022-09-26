@@ -38,28 +38,33 @@ mod tests {
     fn test_get_largest_prime_factor() {
         assert_eq!(7, get_largest_prime_factor(392));
         assert_eq!(29, get_largest_prime_factor(13195));
+        assert_eq!(331, get_largest_prime_factor(45347));
         assert_eq!(997, get_largest_prime_factor(105682));
     }
 
     #[test]
     fn test_prime_factors_performance() {
-        let mut durations = vec![];
+        let upper_bounds = vec![10_000, 100_000, 1_000_000];
 
-        for _ in 0..100 {
-            let now = Instant::now();
+        for upper_bound in upper_bounds {
+            let mut durations = vec![];
 
-            for n in 2..=1_000_000 {
-                let _max_prime_factors = get_largest_prime_factor(n);
+            for _ in 0..100 {
+                let now = Instant::now();
+
+                for n in 2..=upper_bound {
+                    let _max_prime_factors = get_largest_prime_factor(n);
+                }
+
+                durations.push(now.elapsed().as_micros());
             }
 
-            durations.push(now.elapsed().as_millis());
+            let average = durations.iter().sum::<u128>() / (durations.len() as u128);
+
+            println!(
+                "Calculated prime factors for each number up to {} in {} μs",
+                upper_bound, average
+            );
         }
-
-        let average = durations.iter().sum::<u128>() / (durations.len() as u128);
-
-        println!(
-            "Calculated prime factors for each number within [2, 1000000] range in {} ms",
-            average
-        );
     }
 }
