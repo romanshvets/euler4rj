@@ -1,68 +1,34 @@
 package com.rshvets.euler;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
 public class Problem003 {
 
     public static void main(String[] args) {
-        var primeFactors = getPrimeFactors(600851475143L);
-
-        System.out.printf("Result: %s", getLargestPrimeFactor(primeFactors));
+        System.out.printf("Result: %s\n", getLargestPrimeFactor(600851475143L));
     }
 
-    public static long getLargestPrimeFactor(List<Long> primeFactors) {
-        if (primeFactors.isEmpty())
-            return 0;
+    public static long getLargestPrimeFactor(long n) {
+        long maxPrimeFactor = 0;
 
-        return primeFactors.get(primeFactors.size() - 1);
-    }
+        while (n % 2 == 0) {
+            maxPrimeFactor = 2;
 
-    public static List<Long> getPrimeFactors(long n) {
-        if (isPrime(n)) {
-            return Collections.emptyList();
+            n = n / 2;
         }
 
-        var nextPrime = 2L;
-        var result = new LinkedList<Long>();
+        long upperBound = (long) Math.floor(Math.sqrt(n));
 
-        while (n != 1) {
-            while (n % nextPrime == 0) {
-                n = n / nextPrime;
+        for (var i = 3; i <= upperBound; i = i + 2) {
+            while (n % i == 0) {
+                maxPrimeFactor = i;
 
-                if (!result.contains(nextPrime))
-                    result.add(nextPrime);
+                n = n / i;
             }
-
-            nextPrime = getNextPrime(nextPrime);
         }
 
-        return result;
-    }
-
-    public static long getNextPrime(long base) {
-        var n = base + 1;
-
-        while (!isPrime(n)) {
-            ++n;
+        if (n > 2) {
+            maxPrimeFactor = n;
         }
 
-        return n;
-    }
-
-    public static boolean isPrime(long n) {
-        if (n <= 1) {
-            throw new IllegalArgumentException(String.format("Argument \"%s\" is not acceptable for isPrime function", n));
-        }
-
-        var upperBound = (long) Math.floor(Math.sqrt(n));
-
-        for (var i = 2; i <= upperBound; ++i) {
-            if (n % i == 0)
-                return false;
-        }
-
-        return true;
+        return maxPrimeFactor;
     }
 }

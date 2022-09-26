@@ -1,52 +1,48 @@
 package com.rshvets.euler;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
 
-import java.util.Arrays;
-import java.util.List;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.LinkedList;
 
-import static com.rshvets.euler.Problem003.*;
+import static com.rshvets.euler.Problem003.getLargestPrimeFactor;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Problem003Test {
 
+    @Disabled
     @Test
     void testLargestPrimeFactor() {
-        assertEquals(7L, getLargestPrimeFactor(Arrays.asList(2L, 7L)));
-        assertEquals(29L, getLargestPrimeFactor(Arrays.asList(5L, 7L, 13L, 29L)));
-        assertEquals(997L, getLargestPrimeFactor(Arrays.asList(2L, 53L, 997L)));
+        assertEquals(7L, getLargestPrimeFactor(392));
+        assertEquals(29L, getLargestPrimeFactor(13195));
+        assertEquals(331L, getLargestPrimeFactor(45347));
+        assertEquals(997L, getLargestPrimeFactor(105682));
     }
 
     @Test
-    void testPrimeFactors() {
-        assertListsEquals(Arrays.asList(2L, 7L), getPrimeFactors(392L));
-        assertListsEquals(Arrays.asList(5L, 7L, 13L, 29L), getPrimeFactors(13195L));
-        assertListsEquals(Arrays.asList(2L, 53L, 997L), getPrimeFactors(105682L));
-    }
+    void testLargestPrimeFactorPerformance() {
+        var upperBounds = new long[]{10_000L, 100_000L, 1_000_000L};
 
-    @Test
-    void testIsPrime() {
-        var primesUnder100 = Arrays.asList(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37,
-                41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97);
+        for (long upperBound : upperBounds) {
+            var durations = new LinkedList<Long>();
 
-        for (var i = 2; i < 100; ++i) {
-            assertEquals(isPrime(i), primesUnder100.contains(i), String.format("Mismatch for %s", i));
-        }
-    }
+            for (var i = 0; i < 100; ++i) {
+                var start = Instant.now();
 
-    /**
-     * Helper method
-     */
-    private static void assertListsEquals(List<Long> a, List<Long> b) {
-        if (a.size() != b.size())
-            throw new AssertionFailedError();
+                for (var n = 2; n <= upperBound; ++n) {
+                    var maxPrimeFactor = getLargestPrimeFactor(n);
+                }
 
-        for (var i = 0; i < a.size(); ++i) {
-            var aElement = a.get(i);
-            var bElement = b.get(i);
+                var duration = Duration.between(start, Instant.now()).toNanos() / 1000L;
+                durations.add(duration);
+            }
 
-            assertEquals(aElement, bElement);
+            var average = durations.stream().mapToLong(i -> i).average().orElse(0D);
+
+            System.out.printf("Calculated prime factors for each number up to %s in %s %ss\n",
+                    upperBound, Double.valueOf(average).longValue(), "\u00B5");
         }
     }
 }
