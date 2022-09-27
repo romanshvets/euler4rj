@@ -15,12 +15,20 @@ dependencies {
 }
 
 test {
+    systemProperty "file.encoding", "utf-8"
+
     useJUnitPlatform()
+
+    testLogging {
+        showStandardStreams = true
+    }
 }
 
 compileJava {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
+
+    options.encoding = 'UTF-8'
 }
 
 application {
