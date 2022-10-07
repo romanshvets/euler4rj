@@ -1,12 +1,21 @@
+const N: u64 = 600851475143;
+
 fn main() {
-    println!("Result: {}", get_largest_prime_factor(600851475143));
+    match get_largest_prime_factor(N) {
+        None => {
+            println!("{} is a prime number", N);
+        }
+        Some(largest_prime_factor) => {
+            println!("Result: {:?}", largest_prime_factor);
+        }
+    }
 }
 
-fn get_largest_prime_factor(mut n: u64) -> u64 {
-    let mut max_prime_factor = 0;
+fn get_largest_prime_factor(mut n: u64) -> Option<u64> {
+    let mut result = 0;
 
     while n % 2 == 0 {
-        max_prime_factor = 2;
+        result = 2;
 
         n = n / 2;
     }
@@ -15,56 +24,66 @@ fn get_largest_prime_factor(mut n: u64) -> u64 {
 
     for i in (3..=upper_bound).step_by(2) {
         while n % i == 0 {
-            max_prime_factor = i;
+            result = i;
 
             n = n / i;
         }
     }
 
-    if n > 2 {
-        max_prime_factor = n;
-    }
+    if result == 0 {
+        None
+    } else {
+        if n > 2 {
+            result = n;
+        }
 
-    max_prime_factor
+        Some(result)
+    }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::get_largest_prime_factor;
     use std::time::Instant;
+
+    use crate::get_largest_prime_factor;
 
     #[ignore]
     #[test]
-    fn test_get_largest_prime_factor() {
-        assert_eq!(7, get_largest_prime_factor(392));
-        assert_eq!(29, get_largest_prime_factor(13195));
-        assert_eq!(331, get_largest_prime_factor(45347));
-        assert_eq!(997, get_largest_prime_factor(105682));
+    fn test_get_prime_factors() {
+        assert_eq!(None, get_largest_prime_factor(23));
+        assert_eq!(None, get_largest_prime_factor(59));
+        assert_eq!(None, get_largest_prime_factor(83));
+
+        assert_eq!(Some(7), get_largest_prime_factor(392));
+        assert_eq!(Some(3), get_largest_prime_factor(648));
+        assert_eq!(Some(29), get_largest_prime_factor(13195));
+        assert_eq!(Some(43), get_largest_prime_factor(14534));
+        assert_eq!(Some(331), get_largest_prime_factor(45347));
+        assert_eq!(Some(193), get_largest_prime_factor(75849));
+        assert_eq!(Some(997), get_largest_prime_factor(105682));
     }
 
     #[test]
     fn test_prime_factors_performance() {
-        let upper_bounds = vec![10_000, 100_000, 1_000_000];
+        let upper_bound = 100_000;
 
-        for upper_bound in upper_bounds {
-            let mut durations = vec![];
+        let mut durations = vec![];
 
-            for _ in 0..100 {
-                let now = Instant::now();
+        for _ in 0..25 {
+            let now = Instant::now();
 
-                for n in 2..=upper_bound {
-                    let _max_prime_factors = get_largest_prime_factor(n);
-                }
-
-                durations.push(now.elapsed().as_micros());
+            for n in 2..=upper_bound {
+                let _largest_prime_factor = get_largest_prime_factor(n);
             }
 
-            let average = durations.iter().sum::<u128>() / (durations.len() as u128);
-
-            println!(
-                "Calculated prime factors for each number up to {} in {} μs",
-                upper_bound, average
-            );
+            durations.push(now.elapsed().as_micros());
         }
+
+        let average = durations.iter().sum::<u128>() / (durations.len() as u128);
+
+        println!(
+            "Calculated largest prime factor for each number up to {} in {} μs",
+            upper_bound, average
+        );
     }
 }
