@@ -1,34 +1,47 @@
 package com.rshvets.euler;
 
+import java.util.Optional;
+
 public class Problem003 {
 
+    private static final long N = 600851475143L;
+
     public static void main(String[] args) {
-        System.out.printf("Result: %s\n", getLargestPrimeFactor(600851475143L));
+        var largestPrimeFactor = getLargestPrimeFactor(N);
+        if (largestPrimeFactor.isEmpty()) {
+            System.out.printf("%s is a prime number", N);
+        } else {
+            System.out.printf("Result: %s\n", largestPrimeFactor.get());
+        }
     }
 
-    public static long getLargestPrimeFactor(long n) {
-        long maxPrimeFactor = 0;
+    public static Optional<Long> getLargestPrimeFactor(long n) {
+        var result = 0L;
 
         while (n % 2 == 0) {
-            maxPrimeFactor = 2;
+            result = 2;
 
             n = n / 2;
         }
 
-        long upperBound = (long) Math.floor(Math.sqrt(n));
+        var upperBound = Double.valueOf(Math.floor(Math.sqrt(n))).longValue();
 
         for (var i = 3; i <= upperBound; i = i + 2) {
             while (n % i == 0) {
-                maxPrimeFactor = i;
+                result = i;
 
                 n = n / i;
             }
         }
 
-        if (n > 2) {
-            maxPrimeFactor = n;
-        }
+        if (result == 0) {
+            return Optional.empty();
+        } else {
+            if (n > 2) {
+                result = n;
+            }
 
-        return maxPrimeFactor;
+            return Optional.of(result);
+        }
     }
 }

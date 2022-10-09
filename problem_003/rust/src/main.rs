@@ -69,7 +69,7 @@ mod tests {
 
         let mut durations = vec![];
 
-        for _ in 0..25 {
+        for _ in 0..1000 {
             let now = Instant::now();
 
             for n in 2..=upper_bound {
