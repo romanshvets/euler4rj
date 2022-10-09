@@ -48,7 +48,7 @@ class Problem003Test {
 
         var average = durations.stream().mapToLong(i -> i).average().orElse(0D);
 
-        System.out.printf("Calculated largest prime factor for each number up to %s in %s %ss\n",
+        System.out.printf("Calculated the largest prime factor for each number up to %s in %s %ss\n",
                 upperBound, Double.valueOf(average).longValue(), "\u00B5");
     }
 }

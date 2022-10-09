@@ -82,7 +82,7 @@ mod tests {
         let average = durations.iter().sum::<u128>() / (durations.len() as u128);
 
         println!(
-            "Calculated largest prime factor for each number up to {} in {} μs",
+            "Calculated the largest prime factor for each number up to {} in {} μs",
             upper_bound, average
         );
     }
