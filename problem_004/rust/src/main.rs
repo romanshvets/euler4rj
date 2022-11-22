@@ -53,10 +53,28 @@ fn is_palindrome(digits: &Vec<u128>) -> bool {
 
 #[cfg(test)]
 mod tests {
+    use std::time::Instant;
+
     use crate::{is_palindrome, largest_palindrome, to_digits};
 
     #[test]
     fn test_largest_palindrome() {
+        assert_eq!(9009, largest_palindrome(2));
+    }
+
+    #[test]
+    fn test_largest_palindrome_preformance() {
+        for i in 1..=4 {
+            let now = Instant::now();
+
+            let largest_palindrome = largest_palindrome(i);
+
+            let elapsed = now.elapsed().as_micros();
+
+            println!("Calculated largest palindrome for {}-digit numbers in {:?} µs. Result is {}", i, elapsed, largest_palindrome);
+        }
+
+
         assert_eq!(9009, largest_palindrome(2));
     }
 
