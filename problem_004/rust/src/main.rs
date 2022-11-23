@@ -55,7 +55,7 @@ fn is_palindrome(digits: &Vec<u128>) -> bool {
 mod tests {
     use std::time::Instant;
 
-    use crate::{is_palindrome, largest_palindrome, amount_of_digits, to_digits};
+    use crate::{is_palindrome, largest_palindrome, to_digits};
 
     #[test]
     fn test_largest_palindrome() {
@@ -75,14 +75,6 @@ mod tests {
         }
 
         assert_eq!(9009, largest_palindrome(2));
-    }
-
-    #[test]
-    fn test_amount_of_digits() {
-        assert_eq!(1, amount_of_digits(0));
-        assert_eq!(2, amount_of_digits(45));
-        assert_eq!(3, amount_of_digits(156));
-        assert_eq!(5, amount_of_digits(69434));
     }
 
     #[test]
