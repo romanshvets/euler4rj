@@ -6,10 +6,6 @@ fn largest_palindrome(digits: u32) -> u128 {
     let lower_bound = 10u128.pow(digits - 1);
     let upper_bound = 10u128.pow(digits) - 1;
 
-    let max = upper_bound.pow(2);
-    let max_amount_of_digits = amount_of_digits(max);
-    let shared_digits = Vec::<u128>::new();
-
     let mut largest_palindrome = 0;
 
     for i in (lower_bound..=upper_bound).rev() {
@@ -22,21 +18,6 @@ fn largest_palindrome(digits: u32) -> u128 {
     }
 
     largest_palindrome
-}
-
-fn amount_of_digits(mut n: u128) -> usize {
-    if n == 0 {
-        return 1;
-    }
-
-    let mut res = 0;
-
-    while n > 0 {
-        n = n / 10;
-        res = res + 1;
-    }
-
-    res
 }
 
 fn to_digits(mut n: u128) -> Vec<u128> {
