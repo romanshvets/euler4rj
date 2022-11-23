@@ -74,7 +74,6 @@ mod tests {
             println!("Calculated largest palindrome for {}-digit numbers in {:?} µs. Result is {}", i, elapsed, largest_palindrome);
         }
 
-
         assert_eq!(9009, largest_palindrome(2));
     }
 
