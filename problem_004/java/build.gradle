@@ -1,0 +1,36 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+def junit_version = '5.8.2'
+
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${junit_version}"
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: "${junit_version}"
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "${junit_version}"
+}
+
+test {
+    systemProperty "file.encoding", "utf-8"
+
+    useJUnitPlatform()
+
+    testLogging {
+        showStandardStreams = true
+    }
+}
+
+compileJava {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+
+    options.encoding = 'UTF-8'
+}
+
+application {
+    mainClass = 'com.rshvets.euler.Problem004'
+}
