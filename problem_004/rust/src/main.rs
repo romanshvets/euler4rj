@@ -64,7 +64,7 @@ mod tests {
 
     #[test]
     fn test_largest_palindrome_preformance() {
-        for i in 1..=4 {
+        for i in 1..=5 {
             let now = Instant::now();
 
             let largest_palindrome = largest_palindrome(i);
