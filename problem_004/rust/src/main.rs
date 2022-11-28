@@ -64,16 +64,20 @@ mod tests {
 
     #[test]
     fn test_largest_palindrome_preformance() {
-        for i in 1..=5 {
+        for i in 1..=4 {
             let now = Instant::now();
 
-            let largest_palindrome = largest_palindrome(i);
+            let mut largest_palindrome_result = 0;
 
-            let elapsed = now.elapsed().as_micros();
+            for _ in 0..100 {
+                largest_palindrome_result = largest_palindrome(i);
+            } 
+
+            let elapsed = now.elapsed().as_micros() / 100;
 
             println!(
                 "Calculated largest palindrome for {}-digit numbers in {:?} µs. Result is {}",
-                i, elapsed, largest_palindrome
+                i, elapsed, largest_palindrome_result
             );
         }
     }
