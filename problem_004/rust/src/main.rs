@@ -76,8 +76,6 @@ mod tests {
                 i, elapsed, largest_palindrome
             );
         }
-
-        assert_eq!(9009, largest_palindrome(2));
     }
 
     #[test]
